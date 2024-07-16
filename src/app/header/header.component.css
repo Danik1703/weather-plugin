@@ -1,0 +1,19 @@
+.navbar {
+  background-color: #343a40;
+  color: white;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-brand img {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+}

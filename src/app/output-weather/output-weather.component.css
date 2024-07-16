@@ -1,0 +1,43 @@
+.today-weather-container {
+  display: flex;
+  justify-content: center; /* Центрирование контента по горизонтали */
+  align-items: center; /* Центрирование контента по вертикали */
+  flex-direction: column; /* Отображение в столбец */
+}
+
+.card {
+  background-color: #f8f9fa;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Отступ между карточками */
+  max-width: 400px; /* Максимальная ширина карточек */
+  width: 100%; /* Ширина карточек на всю доступную ширину */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.forecast-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Равномерное распределение карточек по ширине страницы */
+}
+
+.forecast-cards {
+  width: 100%; /* Ширина блока с прогнозом на 5 дней */
+}
+
+@media (max-width: 768px) {
+  .forecast-container {
+    flex-direction: column; /* Отображение карточек в столбец на мобильных устройствах */
+    align-items: center; /* Центрирование карточек по центру */
+  }
+}

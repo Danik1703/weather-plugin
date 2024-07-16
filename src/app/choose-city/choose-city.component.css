@@ -1,0 +1,23 @@
+/* choose-city.component.css */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
