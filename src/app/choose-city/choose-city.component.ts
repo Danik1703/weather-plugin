@@ -62,17 +62,35 @@ export class ChooseCityComponent {
       navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        this.weatherService.getWeatherByCoordinates(latitude, longitude)
-          .subscribe(
-            (data: WeatherData) => {
-              this.weatherData = data;
-              this.errorMessage = '';
-            },
-            (error: any) => {
-              this.errorMessage = 'Не удалось получить информацию о погоде для вашего местоположения';
-              console.error(error);
-            }
-          );
+
+        if (this.view === 'today') {
+          this.weatherService.getWeatherByCoordinates(latitude, longitude)
+            .subscribe(
+              (data: WeatherData) => {
+                this.weatherData = data;
+                this.errorMessage = '';
+              },
+              (error: any) => {
+                this.errorMessage = 'Не удалось получить информацию о погоде для вашего местоположения';
+                console.error(error);
+              }
+            );
+        } else {
+          this.weatherService.getWeatherForecastByCoordinates(latitude, longitude)
+            .subscribe(
+              (data: WeatherData) => {
+                this.weatherData = data;
+                this.errorMessage = '';
+              },
+              (error: any) => {
+                this.errorMessage = 'Не удалось получить информацию о погоде для вашего местоположения';
+                console.error(error);
+              }
+            );
+        }
+      }, (error) => {
+        this.errorMessage = 'Не удалось получить ваше местоположение';
+        console.error(error);
       });
     } else {
       this.errorMessage = 'Геолокация не поддерживается этим браузером.';

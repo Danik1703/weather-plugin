@@ -27,4 +27,9 @@ export class WeatherService {
     const url = `${this.weatherApiUrl}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
     return this.http.get<WeatherData>(url);
   }
+
+  getWeatherForecastByCoordinates(lat: number, lon: number): Observable<WeatherData> {
+    const url = `${this.forecastApiUrl}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
+    return this.http.get<WeatherData>(url);
+  }
 }

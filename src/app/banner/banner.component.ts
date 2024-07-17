@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PlatformHelper } from '@natec/mef-dev-platform-connector';
 
 @Component({
   selector: 'app-banner',
@@ -38,5 +39,9 @@ export class BannerComponent implements OnInit, OnDestroy {
 
   getAsset(path: string): string {
     return `assets${path}`;
+  }
+
+  getBssImage(): string {
+    return PlatformHelper.getAssetUrl() + '/imgs/bss.png';
   }
 }

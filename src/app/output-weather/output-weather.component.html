@@ -1,27 +1,28 @@
-<div *ngIf="weatherData">
-  <div *ngIf="view === 'today'" class="today-weather-container">
-    <h3>Текущая погода в {{ weatherData.city.name }}, {{ weatherData.city.country }}</h3>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Сегодня</h5>
-        <p class="card-text" *ngIf="getTodayWeather()">Температура: {{ getRealTimeTemperature(getTodayWeather().main.temp) | number:'1.0-0' }}°C</p>
-        <p class="card-text" *ngIf="getTodayWeather()">{{ getTodayWeather().weather[0].description }}</p>
-      </div>
-    </div>
+<div *ngIf="view === 'today' && weatherData">
+  <h2>Текущая погода в {{ weatherData.city.name }}</h2>
+  <div *ngIf="getTodayWeather() as todayWeather">
+    <p>Температура: {{ getRealTimeTemperature(todayWeather.main.temp) | number:'1.0-0' }} °C</p>
+    <p>Погода: {{ todayWeather.weather[0].description }}</p>
+    <p>Влажность: {{ todayWeather.main.humidity }}%</p>
+    <p>Ветер: {{ todayWeather.wind.speed }} м/с</p>
   </div>
+</div>
 
-  <div *ngIf="view === '5days'" class="forecast-container">
-    <h3>Прогноз на 5 дней</h3>
-    <div class="forecast-cards">
-      <div *ngFor="let dayForecast of groupByDate(weatherData).slice(0, 5); let i = index" class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ dayForecast.date | date:'EEEE, MMMM d' }}</h5>
-          <div *ngFor="let forecast of dayForecast.forecasts">
-            <p class="card-text">{{ forecast.weather[0].description }}</p>
-            <p class="card-text">Температура: {{ getRealTimeTemperature(forecast.main.temp) | number:'1.0-0' }}°C</p>
-          </div>
-        </div>
-      </div>
+<div *ngIf="view === '5days' && weatherData">
+  <h2>Прогноз погоды на 5 дней в {{ weatherData.city.name }}</h2>
+  <div *ngFor="let group of groupByDate(weatherData)">
+    <h3>{{ group.date | date:'fullDate' }}</h3>
+    <div *ngFor="let forecast of group.forecasts">
+      <p>Время: {{ forecast.dt_txt.split(' ')[1] }}</p>
+      <p>Температура: {{ getRealTimeTemperature(forecast.main.temp) | number:'1.0-0' }} °C</p>
+      <p>Погода: {{ forecast.weather[0].description }}</p>
+      <p>Влажность: {{ forecast.main.humidity }}%</p>
+      <p>Ветер: {{ forecast.wind.speed }} м/с</p>
+      <hr>
     </div>
   </div>
+</div>
+
+<div *ngIf="errorMessage">
+  <p class="error-message">{{ errorMessage }}</p>
 </div>
